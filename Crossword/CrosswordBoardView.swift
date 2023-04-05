@@ -20,24 +20,35 @@ struct Cell {
 }
 
 struct CellView: View {
-    @Binding var letter: String
-    //@Binding var cell: Cell
+    //@Binding var letter: String
+    @Binding var cell: Cell
     
     var body: some View {
-        TextField("", text: $letter)
-            .multilineTextAlignment(.center)
-            .frame(width:25, height: 25)
-            .font(.headline)
-            .background(Color.white)
-            .disableAutocorrection(true)
-            .keyboardType(.default)
-            .textContentType(.oneTimeCode)
-            .onChange(of: letter) { newValue in
-                // limit input to 1 character
-                if newValue.count > 1 {
-                    letter = String(newValue.prefix(1))
-                }
+        
+        ZStack {
+            
+            if cell.isBlocked {
+                Rectangle()
+                    .fill(Color.black)
+                    .frame(width: 25, height: 25)
             }
+            
+            TextField("", text: $cell.letter)
+                .multilineTextAlignment(.center)
+                .frame(width:25, height: 25)
+                .font(.headline)
+                .background(Color.white)
+                .disableAutocorrection(true)
+                .keyboardType(.default)
+                .textContentType(.oneTimeCode)
+                .disabled(cell.isBlocked)
+                .onChange(of: cell.letter) { newValue in
+                    // limit input to 1 character
+                    if newValue.count > 1 {
+                        cell.letter = String(newValue.prefix(1))
+                    }
+                }
+        }
     }
 }
 
@@ -46,7 +57,23 @@ struct CrosswordBoardView: View {
     let gridSize = 15
 //    let cellSize: CGFloat = 30
     
-    @State var cells: [[String]] = Array(repeating: Array(repeating: "", count: 15), count:15)
+    
+    @State var cells: [[Cell]] = Array(repeating: Array(repeating: Cell(), count: 15), count:15)
+    
+    init() {
+           // Set cells to be blocked where necessary
+           cells[3][3].isBlocked = true
+           cells[3][11].isBlocked = true
+           cells[6][7].isBlocked = true
+           cells[6][8].isBlocked = true
+           cells[6][9].isBlocked = true
+           cells[8][6].isBlocked = true
+           cells[9][6].isBlocked = true
+           cells[10][6].isBlocked = true
+           cells[11][3].isBlocked = true
+           cells[11][11].isBlocked = true
+       }
+    
     var body: some View {
         VStack(spacing:0){
             ForEach(0 ..< gridSize, id:\.self) { row in
@@ -55,8 +82,9 @@ struct CrosswordBoardView: View {
 //                        Rectangle()
 //                            .stroke(Color.black, lineWidth: 1)
 //                            .frame(width: cellSize, height: cellSize)
-                        CellView(letter: $cells[row][column])
-                            .border(Color.black, width: 1)
+                        CellView(cell: $cells[row][column])
+                            .border(Color.black, width:1)
+                            
                     }
                 }
             }
