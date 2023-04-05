@@ -10,6 +10,7 @@ struct CellView: View {
     @Binding var letter: String
     var body: some View {
         TextField("", text: $letter)
+            .multilineTextAlignment(.center)
             .frame(width:30, height: 30)
             .font(.headline)
             .background(Color.white)
