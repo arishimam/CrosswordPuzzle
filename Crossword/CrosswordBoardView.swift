@@ -5,24 +5,39 @@
 //  Created by csuftitan on 4/3/23.
 //
 
+
+// TO-DO
+// Cell labels
+// Black out cells and don't allow input
+// Have text input automatically  move in correct direction
 import SwiftUI
+
+struct Cell {
+    var letter: String = ""
+    var isBlocked: Bool = false
+    
+    var cellNum: Int = 0
+}
+
 struct CellView: View {
     @Binding var letter: String
+    //@Binding var cell: Cell
+    
     var body: some View {
         TextField("", text: $letter)
             .multilineTextAlignment(.center)
-            .frame(width:30, height: 30)
+            .frame(width:25, height: 25)
             .font(.headline)
             .background(Color.white)
             .disableAutocorrection(true)
             .keyboardType(.default)
             .textContentType(.oneTimeCode)
             .onChange(of: letter) { newValue in
-                            // limit input to 1 character
-                            if newValue.count > 1 {
-                                letter = String(newValue.prefix(1))
-                            }
-                        }
+                // limit input to 1 character
+                if newValue.count > 1 {
+                    letter = String(newValue.prefix(1))
+                }
+            }
     }
 }
 
@@ -44,10 +59,9 @@ struct CrosswordBoardView: View {
                             .border(Color.black, width: 1)
                     }
                 }
-                
             }
         }
-        .padding()
+        .padding(20)
     }
 }
 
