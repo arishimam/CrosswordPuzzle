@@ -9,7 +9,8 @@
 // TO-DO
 // Cell labels
 // Black out cells and don't allow input
-// Have text input automatically  move in correct direction
+// Have text input automatically move in correct direction
+
 import SwiftUI
 
 struct Cell {
@@ -25,30 +26,28 @@ struct CellView: View {
     
     var body: some View {
         
-        ZStack {
-            
             if cell.isBlocked {
                 Rectangle()
                     .fill(Color.black)
                     .frame(width: 25, height: 25)
-            }
-            
-            TextField("", text: $cell.letter)
-                .multilineTextAlignment(.center)
-                .frame(width:25, height: 25)
-                .font(.headline)
-                .background(Color.white)
-                .disableAutocorrection(true)
-                .keyboardType(.default)
-                .textContentType(.oneTimeCode)
-                .disabled(cell.isBlocked)
-                .onChange(of: cell.letter) { newValue in
-                    // limit input to 1 character
-                    if newValue.count > 1 {
-                        cell.letter = String(newValue.prefix(1))
+                    .background(Color.black)
+            } else {
+                TextField("", text: $cell.letter)
+                    .multilineTextAlignment(.center)
+                    .frame(width:25, height: 25)
+                    .font(.headline)
+                    .background(Color.white)
+                    .disableAutocorrection(true)
+                    .keyboardType(.default)
+                    .textContentType(.oneTimeCode)
+                    .disabled(cell.isBlocked)
+                    .onChange(of: cell.letter) { newValue in
+                        // limit input to 1 character
+                        if newValue.count > 1 {
+                            cell.letter = String(newValue.prefix(1))
+                        }
                     }
-                }
-        }
+            }
     }
 }
 
@@ -60,18 +59,19 @@ struct CrosswordBoardView: View {
     
     @State var cells: [[Cell]] = Array(repeating: Array(repeating: Cell(), count: 15), count:15)
     
-    init() {
-           // Set cells to be blocked where necessary
-           cells[3][3].isBlocked = true
-           cells[3][11].isBlocked = true
-           cells[6][7].isBlocked = true
-           cells[6][8].isBlocked = true
-           cells[6][9].isBlocked = true
-           cells[8][6].isBlocked = true
-           cells[9][6].isBlocked = true
-           cells[10][6].isBlocked = true
-           cells[11][3].isBlocked = true
-           cells[11][11].isBlocked = true
+    func setupBoard() {
+       // Set cells to be blocked where necessary
+       cells[3][3].isBlocked = true
+       cells[3][11].isBlocked = true
+       cells[6][7].isBlocked = true
+       cells[6][8].isBlocked = true
+       cells[6][9].isBlocked = true
+       cells[8][6].isBlocked = true
+       cells[9][6].isBlocked = true
+       cells[10][6].isBlocked = true
+       cells[11][3].isBlocked = true
+       cells[11][11].isBlocked = true
+        
        }
     
     var body: some View {
@@ -84,12 +84,13 @@ struct CrosswordBoardView: View {
 //                            .frame(width: cellSize, height: cellSize)
                         CellView(cell: $cells[row][column])
                             .border(Color.black, width:1)
-                            
+                        
                     }
                 }
             }
         }
         .padding(20)
+        .onAppear(perform: setupBoard)
     }
 }
 
