@@ -42,13 +42,11 @@ struct HomeView: View {
                     }
                     .tag(0)
                     
-                    VStack {
-                        Text("Stats view goes here")
-                    }
-                    .tabItem {
-                        Label("Stats", systemImage: "chart.bar")
-                    }
-                    .tag(1)
+                    StatsView()
+                        .tabItem {
+                            Label("Stats", systemImage: "chart.bar")
+                        }
+                        .tag(1)
                 }
                 .padding()
             }

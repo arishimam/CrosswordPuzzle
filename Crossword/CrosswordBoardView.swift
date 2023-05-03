@@ -8,7 +8,6 @@
 
 // TO-DO
 // Cell labels
-// Black out cells and don't allow input
 // Have text input automatically move in correct direction
 
 import SwiftUI
