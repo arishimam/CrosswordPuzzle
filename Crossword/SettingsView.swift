@@ -5,6 +5,7 @@ struct SettingsView: View {
     @State private var showTimer = false
     @State private var showMistakes = false
     @State private var skipFilledSquares = false
+    @State private var showHowToPlayView = false
 
     @Environment(\.presentationMode) var presentationMode
 
@@ -13,9 +14,14 @@ struct SettingsView: View {
             Form {
                 Section {
                     Button(action: {
-                        // Handle "How to play" button action
+                        // Update the action to set showHowToPlayView to true
+                        showHowToPlayView = true
                     }) {
-                        Text("How To Play")
+                        Text("How to play")
+                    }
+                    // Add the following line to present HowToPlayView as a sheet
+                    .sheet(isPresented: $showHowToPlayView) {
+                        HowToPlayView()
                     }
                 }
                 

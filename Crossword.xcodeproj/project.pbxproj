@@ -17,6 +17,7 @@
 		7A02A2DF29DB487400BCD2A1 /* CrosswordBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */; };
 		7AE538932A01E70B00413841 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538922A01E70B00413841 /* HomeView.swift */; };
 		7AE538952A01E8F600413841 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538942A01E8F600413841 /* SettingsView.swift */; };
+		7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538DA2A02E1A100413841 /* HowToPlayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordBoardView.swift; sourceTree = "<group>"; };
 		7AE538922A01E70B00413841 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7AE538942A01E8F600413841 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7AE538DA2A02E1A100413841 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				7A02A2BA29DB482300BCD2A1 /* Preview Content */,
 				7AE538922A01E70B00413841 /* HomeView.swift */,
 				7AE538942A01E8F600413841 /* SettingsView.swift */,
+				7AE538DA2A02E1A100413841 /* HowToPlayView.swift */,
 			);
 			path = Crossword;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */,
 				7AE538952A01E8F600413841 /* SettingsView.swift in Sources */,
 				7A02A2B729DB482100BCD2A1 /* ContentView.swift in Sources */,
 				7AE538932A01E70B00413841 /* HomeView.swift in Sources */,
