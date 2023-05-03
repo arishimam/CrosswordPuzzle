@@ -56,7 +56,7 @@ struct CrosswordBoardView: View {
     let gridSize = 15
 //    let cellSize: CGFloat = 30
     
-    
+    @State private var showSettingsView = false
     @State var cells: [[Cell]] = Array(repeating: Array(repeating: Cell(), count: 15), count:15)
     
     func setupBoard() {
@@ -88,6 +88,15 @@ struct CrosswordBoardView: View {
                     }
                 }
             }
+        }
+        .navigationBarTitle("Crossword Puzzle", displayMode: .inline)
+        .navigationBarItems(trailing: Button(action: {
+            showSettingsView.toggle()
+        }){
+          Image(systemName: "gear")
+        })
+        .sheet(isPresented: $showSettingsView){
+            SettingsView()
         }
         .padding(20)
         .onAppear(perform: setupBoard)

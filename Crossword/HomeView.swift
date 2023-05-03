@@ -11,9 +11,9 @@ struct HomeView: View {
             VStack {
                 TabView(selection: $selectedTab) {
                     VStack {
-                        Button(action: {
-                            showCrosswordBoardView.toggle()
-                        }) {
+//                        Button(action: {
+                        NavigationLink(destination: CrosswordBoardView()){
+//                            showCrosswordBoardView.toggle()
                             Text("New Game")
                                 .font(.title2)
                                 .padding()
@@ -21,9 +21,8 @@ struct HomeView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        .sheet(isPresented: $showCrosswordBoardView) {
-                            CrosswordBoardView()
-                        }
+//                        .sheet(isPresented: $showCrosswordBoardView) {
+//                            CrosswordBoardView()}
                         
                         if hasExistingGame {
                             Button(action: {
