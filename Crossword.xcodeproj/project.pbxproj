@@ -15,6 +15,8 @@
 		7A02A2D029DB482300BCD2A1 /* CrosswordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2CF29DB482300BCD2A1 /* CrosswordUITests.swift */; };
 		7A02A2D229DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2D129DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift */; };
 		7A02A2DF29DB487400BCD2A1 /* CrosswordBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */; };
+		7AE538932A01E70B00413841 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538922A01E70B00413841 /* HomeView.swift */; };
+		7AE538952A01E8F600413841 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538942A01E8F600413841 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		7A02A2CF29DB482300BCD2A1 /* CrosswordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordUITests.swift; sourceTree = "<group>"; };
 		7A02A2D129DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordBoardView.swift; sourceTree = "<group>"; };
+		7AE538922A01E70B00413841 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7AE538942A01E8F600413841 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 				7A02A2B629DB482100BCD2A1 /* ContentView.swift */,
 				7A02A2B829DB482300BCD2A1 /* Assets.xcassets */,
 				7A02A2BA29DB482300BCD2A1 /* Preview Content */,
+				7AE538922A01E70B00413841 /* HomeView.swift */,
+				7AE538942A01E8F600413841 /* SettingsView.swift */,
 			);
 			path = Crossword;
 			sourceTree = "<group>";
@@ -260,7 +266,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AE538952A01E8F600413841 /* SettingsView.swift in Sources */,
 				7A02A2B729DB482100BCD2A1 /* ContentView.swift in Sources */,
+				7AE538932A01E70B00413841 /* HomeView.swift in Sources */,
 				7A02A2B529DB482100BCD2A1 /* CrosswordApp.swift in Sources */,
 				7A02A2DF29DB487400BCD2A1 /* CrosswordBoardView.swift in Sources */,
 			);
