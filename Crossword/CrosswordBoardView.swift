@@ -13,14 +13,19 @@
 import SwiftUI
 
 struct Cell {
-    var letter: String = ""
+    var letter: String
     var isBlocked: Bool = false
-    
+
     var cellNum: Int = 0
+    
+    init(letter: Character) {
+        self.letter = String(letter)
+        self.isBlocked = (letter == " ")
+    }
 }
 
+
 struct CellView: View {
-    //@Binding var letter: String
     @Binding var cell: Cell
     
     var body: some View {
@@ -52,58 +57,64 @@ struct CellView: View {
 
 
 struct CrosswordBoardView: View {
-    let gridSize = 15
-//    let cellSize: CGFloat = 30
-    
+    @State var puzzle: CrosswordPuzzle?
+    @State var cells: [[Cell]] = []
     @State private var showSettingsView = false
-    @State var cells: [[Cell]] = Array(repeating: Array(repeating: Cell(), count: 15), count:15)
+    @State var isLoading: Bool = true  // Flag to track the loading state
     
-    func setupBoard() {
-       // Set cells to be blocked where necessary
-       cells[3][3].isBlocked = true
-       cells[3][11].isBlocked = true
-       cells[6][7].isBlocked = true
-       cells[6][8].isBlocked = true
-       cells[6][9].isBlocked = true
-       cells[8][6].isBlocked = true
-       cells[9][6].isBlocked = true
-       cells[10][6].isBlocked = true
-       cells[11][3].isBlocked = true
-       cells[11][11].isBlocked = true
-        
-       }
+    let puzzleFile: String
+    
+    // Create a separate method for loading the data
+    func loadData() {
+        let service = CrosswordService()
+        puzzle = service.loadPuzzle(from: puzzleFile)
+        if let puzzle = puzzle {
+            setupBoard(puzzle: puzzle)
+        }
+        isLoading = false
+    }
+    
+    // Sets cells to be blocked where necessary
+    func setupBoard(puzzle: CrosswordPuzzle) {
+        let rows = puzzle.puzzle.trimmingCharacters(in: .whitespacesAndNewlines).split(separator: "\n")
+        cells = rows.map { row in
+            row.map { Cell(letter: $0) }
+        }
+    }
     
     var body: some View {
-        VStack(spacing:0){
-            ForEach(0 ..< gridSize, id:\.self) { row in
-                HStack(spacing:0) {
-                    ForEach(0 ..< gridSize, id:\.self) { column in
-//                        Rectangle()
-//                            .stroke(Color.black, lineWidth: 1)
-//                            .frame(width: cellSize, height: cellSize)
-                        CellView(cell: $cells[row][column])
-                            .border(Color.black, width:1)
-                        
+        Group {
+            if isLoading {
+                Text("Loading puzzle...")
+            } else {
+                VStack(spacing: 0){
+                    ForEach(0 ..< cells.count, id: \.self) { row in
+                        HStack(spacing: 0) {
+                            ForEach(0 ..< cells[row].count, id: \.self) { column in
+                                CellView(cell: $cells[row][column])
+                                    .border(Color.black, width: 1)
+                            }
+                        }
                     }
                 }
+                .navigationBarTitle("Crossword Puzzle", displayMode: .inline)
+                .navigationBarItems(trailing: Button(action: {
+                    showSettingsView.toggle()
+                }){
+                    Image(systemName: "gear")
+                })
+                .sheet(isPresented: $showSettingsView){
+                    SettingsView()
+                }
+                .padding(20)
             }
         }
-        .navigationBarTitle("Crossword Puzzle", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-            showSettingsView.toggle()
-        }){
-          Image(systemName: "gear")
-        })
-        .sheet(isPresented: $showSettingsView){
-            SettingsView()
-        }
-        .padding(20)
-        .onAppear(perform: setupBoard)
+        .onAppear(perform: loadData)
     }
 }
 
 struct CrosswordBoardView_Previews: PreviewProvider {
     static var previews: some View {
-        CrosswordBoardView()
+        CrosswordBoardView(puzzleFile: "puzzle")
     }
 }

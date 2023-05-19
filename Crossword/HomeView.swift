@@ -5,14 +5,15 @@ struct HomeView: View {
     @State private var showSettingsView = false
     @State private var showCrosswordBoardView = false
     @State private var hasExistingGame = false
-
+    
+    
     var body: some View {
         NavigationView {
             VStack {
                 TabView(selection: $selectedTab) {
                     VStack {
 //                        Button(action: {
-                        NavigationLink(destination: CrosswordBoardView()){
+                        NavigationLink(destination: CrosswordBoardView(puzzleFile: "puzzle")){
 //                            showCrosswordBoardView.toggle()
                             Text("New Game")
                                 .font(.title2)
