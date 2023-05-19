@@ -1,0 +1,268 @@
+{
+  "puzzle": "  LEMUR  CERES \n MAPUTO POLYMER\nSATIRES ANADAMA\nTRICKSTER BENIN\nRIME  EVAPORATE\nONEND RADAR TEE\nPARTYS NEGATES \n   ENUMERATE   \n SCRAPES NELSON\nSTA SPACE DEERE\nHALFTONES  VIDE\nARIA RESTRAINED\nRIBLETS ROUSERS\nKNESSET AMEERS \n GREED  YARDS  \n",
+  "key": {
+    "across": {
+      "1": {
+        "clue": "Madagascar mammal",
+        "word": "LEMUR"
+      },
+      "6": {
+        "clue": "Roman version of Demeter",
+        "word": "CERES"
+      },
+      "11": {
+        "clue": "Capital of Mozambique",
+        "word": "MAPUTO"
+      },
+      "12": {
+        "clue": "Compound used in plastics",
+        "word": "POLYMER"
+      },
+      "14": {
+        "clue": "Lampoons",
+        "word": "SATIRES"
+      },
+      "15": {
+        "clue": "Bread of Colonial America",
+        "word": "ANADAMA"
+      },
+      "16": {
+        "clue": "Fraud",
+        "word": "TRICKSTER"
+      },
+      "18": {
+        "clue": "Dahomey, now",
+        "word": "BENIN"
+      },
+      "19": {
+        "clue": "Frost",
+        "word": "RIME"
+      },
+      "20": {
+        "clue": "Vanish",
+        "word": "EVAPORATE"
+      },
+      "22": {
+        "clue": "Upright",
+        "word": "ONEND"
+      },
+      "24": {
+        "clue": "Burghoff role",
+        "word": "RADAR"
+      },
+      "25": {
+        "clue": "Kind of shirt",
+        "word": "TEE"
+      },
+      "26": {
+        "clue": "\"The___ Over, \" 1956 song",
+        "word": "PARTYS"
+      },
+      "28": {
+        "clue": "Nullifies",
+        "word": "NEGATES"
+      },
+      "30": {
+        "clue": "Recount",
+        "word": "ENUMERATE"
+      },
+      "32": {
+        "clue": "Predicaments",
+        "word": "SCRAPES"
+      },
+      "34": {
+        "clue": "Byron or Horatio",
+        "word": "NELSON"
+      },
+      "38": {
+        "clue": "Dep.",
+        "word": "STA"
+      },
+      "39": {
+        "clue": "Michener novel",
+        "word": "SPACE"
+      },
+      "41": {
+        "clue": "Name in farm implements",
+        "word": "DEERE"
+      },
+      "42": {
+        "clue": "Values intermediate between light and dark",
+        "word": "HALFTONES"
+      },
+      "44": {
+        "clue": "___ infra (see below)",
+        "word": "VIDE"
+      },
+      "45": {
+        "clue": "\"Casta diva,\" e.g.",
+        "word": "ARIA"
+      },
+      "46": {
+        "clue": "Bridled",
+        "word": "RESTRAINED"
+      },
+      "49": {
+        "clue": "Certain cuts of lamb or veal",
+        "word": "RIBLETS"
+      },
+      "51": {
+        "clue": "Alarm clocks",
+        "word": "ROUSERS"
+      },
+      "52": {
+        "clue": "Israeli parliament",
+        "word": "KNESSET"
+      },
+      "53": {
+        "clue": "Islamic chieftains",
+        "word": "AMEERS"
+      },
+      "54": {
+        "clue": "Von Stroheim film 1923",
+        "word": "GREED"
+      },
+      "55": {
+        "clue": "Courts",
+        "word": "YARDS"
+      }
+    },
+    "down": {
+      "1": {
+        "clue": "Reformation martyr Hugh ___",
+        "word": "LATIMER"
+      },
+      "2": {
+        "clue": "Focal point, as of a quake",
+        "word": "EPICENTER"
+      },
+      "3": {
+        "clue": "Gloom",
+        "word": "MURK"
+      },
+      "4": {
+        "clue": "Ouray's people",
+        "word": "UTES"
+      },
+      "5": {
+        "clue": "List",
+        "word": "ROSTER"
+      },
+      "6": {
+        "clue": "Pro's opposite",
+        "word": "CON"
+      },
+      "7": {
+        "clue": "Added details",
+        "word": "ELABORATED"
+      },
+      "8": {
+        "clue": "\"Toilers of the Sea\" painter",
+        "word": "RYDER"
+      },
+      "9": {
+        "clue": "Arise",
+        "word": "EMANATE"
+      },
+      "10": {
+        "clue": "Shem's descendants",
+        "word": "SEMITES"
+      },
+      "11": {
+        "clue": "Boat basin",
+        "word": "MARINA"
+      },
+      "12": {
+        "clue": "Drum majorette, e.g.",
+        "word": "PARADER"
+      },
+      "13": {
+        "clue": "Rajah's wife",
+        "word": "RANEE"
+      },
+      "14": {
+        "clue": "ltem for Figaro",
+        "word": "STROP"
+      },
+      "17": {
+        "clue": "Fades away",
+        "word": "EVANESCES"
+      },
+      "21": {
+        "clue": "Polytheist or allotheist",
+        "word": "PAGAN"
+      },
+      "23": {
+        "clue": "Hereditary ruler",
+        "word": "DYNAST"
+      },
+      "27": {
+        "clue": "Maintained",
+        "word": "SUPPORTED"
+      },
+      "29": {
+        "clue": "Broadcast, in a way",
+        "word": "TELEVISED"
+      },
+      "31": {
+        "clue": "Most shabby",
+        "word": "MEANEST"
+      },
+      "32": {
+        "clue": "\"Then nightly sings the ___ owl\" Shak.",
+        "word": "STARING"
+      },
+      "33": {
+        "clue": "Quality",
+        "word": "CALIBER"
+      },
+      "35": {
+        "clue": "Certain fishermen",
+        "word": "SEINERS"
+      },
+      "36": {
+        "clue": "Ukases",
+        "word": "ORDERS"
+      },
+      "37": {
+        "clue": "\" ... to each according to his ___\" Marx",
+        "word": "NEEDS"
+      },
+      "38": {
+        "clue": "Dogfish or hammerhead",
+        "word": "SHARK"
+      },
+      "40": {
+        "clue": "Animal that has wandered off",
+        "word": "ESTRAY"
+      },
+      "43": {
+        "clue": "Kind of face or front",
+        "word": "FALSE"
+      },
+      "47": {
+        "clue": "\"Arrivederci, ___\"",
+        "word": "ROMA"
+      },
+      "48": {
+        "clue": "Heifetz's teacher",
+        "word": "AUER"
+      },
+      "50": {
+        "clue": "Naples-to-Salerno dir.",
+        "word": "ESE"
+      }
+    }
+  },
+  "metadata": {
+    "author": "Nancy Joline",
+    "editor": "Eugene T. Maleska",
+    "rows": 15,
+    "columns": 15,
+    "date": {
+      "month": 12,
+      "day": 8,
+      "year": 1990
+    }
+  }
+}
