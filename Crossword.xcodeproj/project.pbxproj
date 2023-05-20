@@ -7,21 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A02A2B729DB482100BCD2A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2B629DB482100BCD2A1 /* ContentView.swift */; };
 		7A02A2B929DB482300BCD2A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A02A2B829DB482300BCD2A1 /* Assets.xcassets */; };
 		7A02A2BC29DB482300BCD2A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A02A2BB29DB482300BCD2A1 /* Preview Assets.xcassets */; };
 		7A02A2C629DB482300BCD2A1 /* CrosswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2C529DB482300BCD2A1 /* CrosswordTests.swift */; };
 		7A02A2D029DB482300BCD2A1 /* CrosswordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2CF29DB482300BCD2A1 /* CrosswordUITests.swift */; };
 		7A02A2D229DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2D129DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift */; };
 		7A02A2DF29DB487400BCD2A1 /* CrosswordBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */; };
-		7A799FD02A15CD70005CD740 /* Clue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A799FCF2A15CD70005CD740 /* Clue.swift */; };
-		7A799FD22A15D89D005CD740 /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A799FD12A15D89D005CD740 /* Textfield.swift */; };
+		7A35E5792A173ED900686AE8 /* CrosswordPuzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E5782A173ED900686AE8 /* CrosswordPuzzle.swift */; };
+		7A35E57B2A173FC000686AE8 /* CrosswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E57A2A173FC000686AE8 /* CrosswordService.swift */; };
+		7A35E57D2A17419900686AE8 /* puzzle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A35E57C2A17419900686AE8 /* puzzle.json */; };
+		7A35E57F2A18485600686AE8 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E57E2A18485600686AE8 /* PauseView.swift */; };
+		7A35E5812A18488200686AE8 /* WinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E5802A18488200686AE8 /* WinView.swift */; };
+		7A35E5852A18858600686AE8 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E5842A18858600686AE8 /* HistoryView.swift */; };
+		7A35E5882A18896200686AE8 /* puzzle2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A35E5862A18896200686AE8 /* puzzle2.json */; };
+		7A35E5892A18896200686AE8 /* puzzle3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A35E5872A18896200686AE8 /* puzzle3.json */; };
+		7A35E58B2A188CB200686AE8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E58A2A188CB200686AE8 /* ProfileView.swift */; };
 		7AE538932A01E70B00413841 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538922A01E70B00413841 /* HomeView.swift */; };
 		7AE538952A01E8F600413841 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538942A01E8F600413841 /* SettingsView.swift */; };
 		7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538DA2A02E1A100413841 /* HowToPlayView.swift */; };
 		7AE538DE2A02E83700413841 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538DD2A02E83700413841 /* StatsView.swift */; };
 		7AE538DF2A02E9AF00413841 /* CrosswordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02A2B429DB482100BCD2A1 /* CrosswordApp.swift */; };
-		7AFB61542A1776E10022EDF1 /* puzzle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A799FD32A16C4B3005CD740 /* puzzle.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +49,6 @@
 /* Begin PBXFileReference section */
 		7A02A2B129DB482100BCD2A1 /* Crossword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crossword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A02A2B429DB482100BCD2A1 /* CrosswordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordApp.swift; sourceTree = "<group>"; };
-		7A02A2B629DB482100BCD2A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7A02A2B829DB482300BCD2A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A02A2BB29DB482300BCD2A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7A02A2C129DB482300BCD2A1 /* CrosswordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrosswordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,9 +57,15 @@
 		7A02A2CF29DB482300BCD2A1 /* CrosswordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordUITests.swift; sourceTree = "<group>"; };
 		7A02A2D129DB482300BCD2A1 /* CrosswordUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordBoardView.swift; sourceTree = "<group>"; };
-		7A799FCF2A15CD70005CD740 /* Clue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clue.swift; sourceTree = "<group>"; };
-		7A799FD12A15D89D005CD740 /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
-		7A799FD32A16C4B3005CD740 /* puzzle.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = puzzle.json; sourceTree = "<group>"; };
+		7A35E5782A173ED900686AE8 /* CrosswordPuzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordPuzzle.swift; sourceTree = "<group>"; };
+		7A35E57A2A173FC000686AE8 /* CrosswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrosswordService.swift; sourceTree = "<group>"; };
+		7A35E57C2A17419900686AE8 /* puzzle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle.json; sourceTree = "<group>"; };
+		7A35E57E2A18485600686AE8 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
+		7A35E5802A18488200686AE8 /* WinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinView.swift; sourceTree = "<group>"; };
+		7A35E5842A18858600686AE8 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		7A35E5862A18896200686AE8 /* puzzle2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle2.json; sourceTree = "<group>"; };
+		7A35E5872A18896200686AE8 /* puzzle3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle3.json; sourceTree = "<group>"; };
+		7A35E58A2A188CB200686AE8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7AE538922A01E70B00413841 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7AE538942A01E8F600413841 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7AE538DA2A02E1A100413841 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
@@ -110,18 +120,23 @@
 		7A02A2B329DB482100BCD2A1 /* Crossword */ = {
 			isa = PBXGroup;
 			children = (
+				7A35E58A2A188CB200686AE8 /* ProfileView.swift */,
+				7A35E5782A173ED900686AE8 /* CrosswordPuzzle.swift */,
 				7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */,
-				7A799FD32A16C4B3005CD740 /* puzzle.json */,
-				7A799FD12A15D89D005CD740 /* Textfield.swift */,
-				7A02A2B629DB482100BCD2A1 /* ContentView.swift */,
-				7A02A2B829DB482300BCD2A1 /* Assets.xcassets */,
-				7A02A2BA29DB482300BCD2A1 /* Preview Content */,
 				7AE538922A01E70B00413841 /* HomeView.swift */,
-				7A799FCF2A15CD70005CD740 /* Clue.swift */,
 				7AE538942A01E8F600413841 /* SettingsView.swift */,
 				7AE538DA2A02E1A100413841 /* HowToPlayView.swift */,
+				7A35E5842A18858600686AE8 /* HistoryView.swift */,
 				7AE538DD2A02E83700413841 /* StatsView.swift */,
+				7A35E57A2A173FC000686AE8 /* CrosswordService.swift */,
 				7A02A2B429DB482100BCD2A1 /* CrosswordApp.swift */,
+				7A35E57C2A17419900686AE8 /* puzzle.json */,
+				7A35E5862A18896200686AE8 /* puzzle2.json */,
+				7A35E5872A18896200686AE8 /* puzzle3.json */,
+				7A02A2B829DB482300BCD2A1 /* Assets.xcassets */,
+				7A02A2BA29DB482300BCD2A1 /* Preview Content */,
+				7A35E57E2A18485600686AE8 /* PauseView.swift */,
+				7A35E5802A18488200686AE8 /* WinView.swift */,
 			);
 			path = Crossword;
 			sourceTree = "<group>";
@@ -255,8 +270,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A35E5882A18896200686AE8 /* puzzle2.json in Resources */,
+				7A35E57D2A17419900686AE8 /* puzzle.json in Resources */,
+				7A35E5892A18896200686AE8 /* puzzle3.json in Resources */,
 				7A02A2BC29DB482300BCD2A1 /* Preview Assets.xcassets in Resources */,
-				7AFB61542A1776E10022EDF1 /* puzzle.json in Resources */,
 				7A02A2B929DB482300BCD2A1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,14 +299,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A35E57B2A173FC000686AE8 /* CrosswordService.swift in Sources */,
 				7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */,
+				7A35E5792A173ED900686AE8 /* CrosswordPuzzle.swift in Sources */,
+				7A35E57F2A18485600686AE8 /* PauseView.swift in Sources */,
+				7A35E58B2A188CB200686AE8 /* ProfileView.swift in Sources */,
 				7AE538952A01E8F600413841 /* SettingsView.swift in Sources */,
+				7A35E5852A18858600686AE8 /* HistoryView.swift in Sources */,
+				7A35E5812A18488200686AE8 /* WinView.swift in Sources */,
 				7AE538DE2A02E83700413841 /* StatsView.swift in Sources */,
-				7A02A2B729DB482100BCD2A1 /* ContentView.swift in Sources */,
-				7A799FD22A15D89D005CD740 /* Textfield.swift in Sources */,
 				7AE538DF2A02E9AF00413841 /* CrosswordApp.swift in Sources */,
 				7AE538932A01E70B00413841 /* HomeView.swift in Sources */,
-				7A799FD02A15CD70005CD740 /* Clue.swift in Sources */,
 				7A02A2DF29DB487400BCD2A1 /* CrosswordBoardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,7 +471,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Crossword/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Crossword/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -479,7 +499,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Crossword/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Crossword/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

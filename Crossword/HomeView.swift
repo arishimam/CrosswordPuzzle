@@ -4,16 +4,16 @@ struct HomeView: View {
     @State private var selectedTab = 0
     @State private var showSettingsView = false
     @State private var showCrosswordBoardView = false
-    @State private var hasExistingGame = false
+//    @State private var hasExistingGame = false
+    
+    @StateObject var gameManager: GameManager
 
     var body: some View {
         NavigationView {
             VStack {
                 TabView(selection: $selectedTab) {
                     VStack {
-//                        Button(action: {
-                        NavigationLink(destination: CrosswordBoardView()){
-//                            showCrosswordBoardView.toggle()
+                        NavigationLink(destination: CrosswordBoardView().environmentObject(gameManager)){
                             Text("New Game")
                                 .font(.title2)
                                 .padding()
@@ -21,20 +21,26 @@ struct HomeView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-//                        .sheet(isPresented: $showCrosswordBoardView) {
-//                            CrosswordBoardView()}
-                        
-                        if hasExistingGame {
+                        .onAppear {
+                            gameManager.loadData()
+                        }
+
+                        if gameManager.puzzle != nil {
                             Button(action: {
                                 // Continue the existing game
+//                                if gameManager.puzzle != nil {
+//                                    self.hasExistingGame = true
+//                                }
                             }) {
                                 Text("Continue")
                                     .font(.title2)
                                     .padding()
-                                    .background(Color.green)
+//                                    .background(gameManager.puzzle != nil ? Color.green : Color.gray)
+                                    .background(.gray)
                                     .foregroundColor(.white)
                                     .cornerRadius(8)
                             }
+                            .disabled(gameManager.puzzle == nil)
                         }
                     }
                     .tabItem {
@@ -47,6 +53,15 @@ struct HomeView: View {
                             Label("Stats", systemImage: "chart.bar")
                         }
                         .tag(1)
+                    
+                    ProfileView()  // Add ProfileView as a tab item
+                        .tabItem {
+                            Label("Profile", systemImage: "person.crop.circle")
+                        }
+                        .tag(2)
+
+                    
+                    
                 }
                 .padding()
             }
@@ -60,11 +75,13 @@ struct HomeView: View {
                 SettingsView()
             }
         }
+        
     }
 }
 
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(gameManager: GameManager(puzzleFile: "puzzle"))
     }
 }

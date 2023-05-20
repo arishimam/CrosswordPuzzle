@@ -5,297 +5,340 @@
 //  Created by csuftitan on 4/3/23.
 //
 
-
-// TO-DO
-// Cell labels
-// Have text input automatically move in correct direction
 import SwiftUI
 
-struct CrosswordPuzzle: Decodable {
-    let puzzle: String
-    let key: Key
-    let metadata: Metadata
-    
-    struct Key: Decodable {
-        let across: [String: ClueData]
-        let down: [String: ClueData]
-        
-        struct ClueData: Decodable, Hashable {
-            let clue: String
-            let word: String
-        }
-    }
-    struct Metadata: Decodable {
-        let author: String
-        let editor: String
-        let rows: Int
-        let columns: Int
-        let date: DateData
-        
-        struct DateData: Decodable {
-            let month: Int
-            let day: Int
-            let year: Int
-        }
-    }
-}
 
 struct Cell {
-    var letter: String
-    var isBlocked: Bool
+    var userInput: String = ""
+    var isBlocked: Bool = false
+    var correctAnswer: String
+    var isIncorrect: Bool = false
+    var number: Int?
     var row: Int
     var column: Int
-    var clueNumber: Int?
-    var acrossClue: CrosswordPuzzle.Key.ClueData?
-    var acrossWord: String?
-    var downClue: CrosswordPuzzle.Key.ClueData?
-    var downWord: String?
+    
+    
+    init(letter: Character) {
+        self.correctAnswer = String(letter)
+        self.isBlocked = (letter == " ")
+        self.row = 0
+        self.column = 0
+    }
 }
 
-struct CellView: View {
-    var cell: Cell
-    var viewModel: CrosswordBoardViewModel
 
+struct CellView: View {
+    @Binding var cell: Cell
+    @Binding var showAnswers: Bool
+    @Binding var isCheckingAnswers:Bool
+    @Binding var userInputStore: [String: String]
+    
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        ZStack {
             if cell.isBlocked {
                 Rectangle()
                     .fill(Color.black)
+                    .frame(width: 25, height: 25)
             } else {
-                FocusedTextField(text: Binding(
-                    get: { self.cell.letter },
-                    set: { viewModel.cells[cell.row][cell.column].letter = $0 }),
-                    isUserInteractionEnabled: !cell.isBlocked,
-                    onCommit: {
-                        viewModel.completionStatus = viewModel.checkCompletion() ? .win : .lose
-                    },
-                    onUpdate: { newText in
-                        viewModel.cells[cell.row][cell.column].letter = newText
-                    })
-                    .disableAutocorrection(true)
-                    .font(.headline)
-                    .background(Color.white)
+                if showAnswers {
+                    Text(cell.correctAnswer)
+                        .multilineTextAlignment(.center)
+                        .font(.headline)
+                        .background(Color.white)
+                        .frame(width: 25, height: 25)
+                } else {
+                    TextField("", text: $cell.userInput)
+                        .multilineTextAlignment(.center)
+                        .font(.headline)
+                        .background(Color.white)
+                        .disableAutocorrection(true)
+                        .keyboardType(.default)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(isCheckingAnswers && cell.isIncorrect ? .red : .black)
+                        .frame(width: 25, height: 25)
+                        .onChange(of: cell.userInput) { newValue in
+                            // limit input to 1 character
+                            if newValue.count > 1 {
+                                cell.userInput = String(newValue.prefix(1))
+                            }
+                            let cellKey = "\(cell.row)-\(cell.column)"
+                            if newValue.isEmpty {
+                                userInputStore.removeValue(forKey: cellKey)
+                            } else {
+                                userInputStore[cellKey] = cell.userInput
+                            }
+                        }
+
+                }
+                
+                GeometryReader { geometry in
+                    if let number = cell.number {
+                        Text("\(number)")
+                            .font(.footnote)
+                            .font(.system(size: 10))
+                            .foregroundColor(.blue)
+                            .opacity(0.6)
+                            .offset(x: -geometry.size.width / 2 + 15, y: -geometry.size.height / 2 + 15)
+                    }
+                }
             }
         }
         .frame(width: 25, height: 25)
-        .border(Color.black, width: 1)
     }
 }
 
-class CrosswordBoardViewModel: ObservableObject {
-    let gridSize = 15
+enum ActiveSheet: Identifiable {
+    case settingsView, pauseView, winView
 
-    @Published var showAlert: Bool = false
-    @Published var alertTitle: String = "Test"
-    @Published var alertMessage: String = "Test"
-    @Published var completionStatus: CompletionStatus?
-    @Published var showSettingsView: Bool = false
+    var id: Int {
+        hashValue
+    }
+}
 
 
-    enum CompletionStatus {
-        case win, lose
+class GameManager: ObservableObject {
+    @Published var puzzle: CrosswordPuzzle?
+    @Published var cells: [[Cell]] = []
+    @Published var isLoading: Bool = true  // Flag to track the loading state
+    @Published var showAnswers: Bool = false
+    @Published var isCheckingAnswers: Bool = false
+    @Published var userInputStore: [String: String] = [:]
+    @Published var elapsedTime: Int = 0 // in seconds
+    @Published var timer: Timer? = nil
+    @Published var isPaused: Bool = false
+    @Published var showWinView = false
+    @Published var activeSheet: ActiveSheet?
+
+    let puzzleFile: String
+    
+    init(puzzleFile: String) {
+        self.puzzleFile = puzzleFile
+    }
+
+    // Create a separate method for loading the data
+    func loadData() {
+        let service = CrosswordService()
+        puzzle = service.loadPuzzle(from: puzzleFile)
+        if let puzzle = puzzle {
+            //setupBoard(puzzle: puzzle)
+            setupBoard(puzzle: puzzle, resetUserInput: true)
+        }
+        isLoading = false
+//        isExistingGameDataReady = true
     }
     
-    
-    @Published var cells: [[Cell]] = (0..<15).map { row in
-        (0..<15).map { column in
-            Cell(letter: "", isBlocked: false, row: row, column: column)
-        }
-    }
-    
-    // State variable for crosswordPuzzle
-    var crosswordPuzzle: CrosswordPuzzle? = nil
-    
-    func loadPuzzleData() {
-        guard let url = Bundle.main.url(forResource: "puzzle", withExtension: "json") else {
-            print("Failed to locate puzzle.json in bundle.")
-            return
-        }
-        
-        DispatchQueue.global().async {
-            if let path = Bundle.main.path(forResource: "puzzle", ofType: "json") {
-                do {
-                    let jsonData = try Data(contentsOf: url)
-                    let decoder = JSONDecoder()
-                    let decodedPuzzle = try decoder.decode(CrosswordPuzzle.self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.setupBoard(puzzle: decodedPuzzle.puzzle, key: decodedPuzzle.key)
-                        self.crosswordPuzzle = decodedPuzzle
-                    }
-                } catch {
-                    print("Error loading or decoding JSON: \(error)")
-                }
-            }
-        }
-    }
-    
-    func setupBoard(puzzle: String, key: CrosswordPuzzle.Key) {
-        let puzzleRows = puzzle.split(separator: "\n")
-        var clueNumber = 1
-        
-        for (i, row) in puzzleRows.enumerated() {
-            let rowChars = Array(row)
-            for (j, char) in rowChars.enumerated() {
-                var cell = Cell(letter: "", isBlocked: false, row: i, column: j)
-                
-                if char.isWhitespace {
-                    cell.isBlocked = true
+
+    func setupBoard(puzzle: CrosswordPuzzle, resetUserInput: Bool = false) {
+        let lines = puzzle.puzzle.components(separatedBy: "\n").filter { !$0.isEmpty }
+        var newCells = [[Cell]]()
+        var cellNum = 1 // tracker for cell number
+        var previousRow = [Cell]()
+        for (rIndex, line) in lines.enumerated() {
+            var row = [Cell]()
+            for (cIndex, letter) in line.enumerated() {
+                var cellNumber: Int? = nil
+                var cell = Cell(letter: letter)
+                // Update the cell's row and column
+                cell.row = rIndex
+                cell.column = cIndex
+                // Reset user input if requested
+                if resetUserInput || showAnswers {
+                    cell.userInput = ""
                 } else {
-                    if let acrossClueData = key.across[String(i+1)],
-                       (j == 0 || cells[i][j-1].isBlocked) {
-                        cell.acrossClue = acrossClueData
-                        cell.acrossWord = acrossClueData.word
-                        cell.clueNumber = clueNumber
-                    }
-                    
-                    if let downClueData = key.down[String(j+1)],
-                       (i == 0 || cells[i-1][j].isBlocked) {
-                        cell.downClue = downClueData
-                        cell.downWord = downClueData.word
-                        cell.clueNumber = clueNumber
-                    }
-                    
-                    if cell.clueNumber != nil {
-                        clueNumber += 1
-                    }
+                    let cellKey = "\(rIndex)-\(cIndex)" // Here is the change
+                    cell.userInput = userInputStore[cellKey, default: ""]
                 }
-                
-                cells[i][j] = cell
+                // Check if cell isn't blocked and either it's at the start of a line/column or the previous cell is blocked
+                let isStartOfHorizontalWord = !cell.isBlocked && (cIndex == 0 || row.last?.isBlocked == true)
+                let isStartOfVerticalWord = !cell.isBlocked && (previousRow.isEmpty || previousRow[cIndex].isBlocked)
+                if isStartOfHorizontalWord || isStartOfVerticalWord {
+                    cellNumber = cellNum
+                    cellNum += 1
+                }
+                cell.number = cellNumber
+                row.append(cell)
             }
+            newCells.append(row)
+            previousRow = row
         }
+        cells = newCells
     }
     
-    func checkBoard() -> Bool {
-        // Check Across Words
-        for (_, row) in cells.enumerated() {
-            var word = ""
-            var expectedWord: String? = nil
-            
-            for (j, cell) in row.enumerated() {
-                if cell.isBlocked || j == row.count - 1 {
-                    // Check the word when reaching a blocked cell or the end of the row.
-                    if word != expectedWord {
-                        return false
-                    }
-                    
-                    // Reset the word and expected word.
-                    word = ""
-                    expectedWord = nil
-                } else if cell.acrossClue != nil {
-                    // If the cell is the start of a new word, update the expected word.
-                    expectedWord = cell.acrossWord
-                }
-                
-                // If the cell is not blocked, add its letter to the word.
-                if !cell.isBlocked {
-                    word += cell.letter
+    func hasUserWon() -> Bool {
+        for row in cells {
+            for cell in row {
+                if !cell.isBlocked && (cell.userInput.lowercased() != cell.correctAnswer.lowercased() || cell.userInput.isEmpty) {
+                    return false
                 }
             }
         }
-        
-        // Check Down Words
-        for column in 0..<gridSize {
-            var word = ""
-            var expectedWord: String? = nil
-            
-            for row in 0..<gridSize {
-                let cell = cells[row][column]
-                
-                if cell.isBlocked || row == gridSize - 1 {
-                    // Check the word when reaching a blocked cell or the end of the column.
-                    if word != expectedWord {
-                        return false
-                    }
-                    
-                    // Reset the word and expected word.
-                    word = ""
-                    expectedWord = nil
-                } else if cell.downClue != nil {
-                    // If the cell is the start of a new word, update the expected word.
-                    expectedWord = cell.downWord
-                }
-                
-                // If the cell is not blocked, add its letter to the word.
-                if !cell.isBlocked {
-                    word += cell.letter
-                }
-            }
-        }
-        
-        // If all words match the correct answers, return true.
         return true
     }
-    func checkCompletion() -> Bool {
-        // You can use the logic to check the completion of the crossword puzzle here.
-        // For the sake of example, I'm just returning false.
-        return false
+
+    func checkAnswers() {
+        for row in cells.indices {
+            for column in cells[row].indices {
+                cells[row][column].isIncorrect = cells[row][column].userInput.lowercased() != cells[row][column].correctAnswer.lowercased()
+            }
+        }
+        if hasUserWon() {
+            print("Congratulations, you've won!")
+            activeSheet = .winView
+        }
+    }
+    
+    // Start timer
+    func startTimer() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            if !self.isPaused {
+                self.elapsedTime += 1
+            }
+        }
+    }
+
+    // Pause timer
+    func pauseTimer() {
+        self.isPaused = true
+    }
+    
+    // Resume timer
+    func resumeTimer() {
+        self.isPaused = false
+    }
+    
+    func formatTime(seconds: Int) -> String {
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let seconds = seconds % 60
+        if hours > 0 {
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%02d:%02d", minutes, seconds)
+        }
     }
 }
+
+
+
 
 struct CrosswordBoardView: View {
-    @StateObject var viewModel = CrosswordBoardViewModel()
+    @EnvironmentObject var gameManager: GameManager
 
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(0 ..< viewModel.gridSize, id: \.self) { row in
-                HStack(spacing: 0) {
-                    ForEach(0 ..< viewModel.gridSize, id: \.self) { column in
-                        CellView(cell: viewModel.cells[row][column], viewModel: viewModel)
-                            .border(Color.black, width: 1)
-                    }
+        ZStack {
+            ScrollView {
+                // Timer and pause button
+                HStack {
+                    Spacer()
+                    Text("Time: \(gameManager.formatTime(seconds: gameManager.elapsedTime))")
+                        //.alignmentGuide(.leading) { _ in 0 }
+                    Spacer()
+//                    Button(action: {
+//                        gameManager.pauseTimer()
+//                        gameManager.activeSheet = .pauseView
+//                    }) {
+//                        Image(systemName: "pause")
+//                            .alignmentGuide(.trailing) { _ in 0 }
+//                    }
                 }
-            }
-            HStack {
-                VStack{
-                    Text("Across")
-                        .font(.subheadline)
-                    if let acrossClues = viewModel.crosswordPuzzle?.key.across.sorted(by: { $0.key < $1.key }) {
-                        List(acrossClues, id: \.key) { key, clue in
-                            Text("\(key). \(clue.clue)")
-                                .font(.system(size: 12)) // Set font size as per your need
+                Group {
+                    if gameManager.isLoading {
+                        Text("Loading puzzle...")
+                    } else {
+                        VStack(spacing: 0){
+                            ForEach(0 ..< gameManager.cells.count, id: \.self) { row in
+                                HStack(spacing: 0) {
+                                    ForEach(0 ..< gameManager.cells[row].count, id: \.self) { column in
+                                        CellView(cell: $gameManager.cells[row][column], showAnswers: $gameManager.showAnswers, isCheckingAnswers: $gameManager.isCheckingAnswers, userInputStore: $gameManager.userInputStore)
+                                            .border(Color.black, width: 1)
+                                        
+                                    }
+                                }
+                            }
                         }
+                        .navigationBarTitle("Crossword Puzzle", displayMode: .inline)
+                        .navigationBarItems(leading: HStack {
+                            Button(action: { self.gameManager.showAnswers.toggle() }) {
+                                Text(gameManager.showAnswers ? "Hide Answers" : "Show Answers")
+                            }
+                            Button(action: {
+                                self.gameManager.isCheckingAnswers.toggle()
+                                if self.gameManager.isCheckingAnswers {
+                                    self.gameManager.checkAnswers()
+                                }
+                            }) {
+                                Text(gameManager.isCheckingAnswers ? "Hide Mistakes" : "Check Answers")
+                            }
+                        }, trailing: Button(action: {
+                            gameManager.activeSheet = .settingsView
+                        }){
+                            Image(systemName: "gear")
+                        })
+                        
+                        .padding(20)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)// Adjust this as per your needs
                 
-                VStack{
-                    Text("Down")
-                        .font(.subheadline)
-                    if let downClues = viewModel.crosswordPuzzle?.key.down.sorted(by: { $0.key < $1.key }) {
-                        List(downClues, id: \.key) { key, clue in
-                            Text("\(key). \(clue.clue)")
-                                .font(.system(size: 12)) // Set font size as per your need
-                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onChange(of: gameManager.showAnswers) { _ in
+                    if let puzzle = gameManager.puzzle {
+                        gameManager.setupBoard(puzzle: puzzle)
                     }
                 }
-                .padding(.horizontal)
-                .padding(.top, 20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)// Adjust this as per your needs
+                
+                // Display the clues
+                if let puzzle = gameManager.puzzle {
+                    HStack{
+                        VStack(alignment: .leading) {
+                            Text("Across:")
+                                .bold()
+                                .font(.headline)
+                                .padding(.top)
+                            ForEach(puzzle.key.across.keys.sorted(), id: \.self) { key in
+                                Text("\(Text("\(key).").bold()) \(puzzle.key.across[key]!.clue)")
+                            }
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                        .padding(.top, 5)
+                        .padding(.leading, 10)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        VStack(alignment: .leading) {
+                            Text("Down:")
+                                .bold()
+                                .font(.headline)
+                                .padding(.top)
+                            ForEach(puzzle.key.down.keys.sorted(), id: \.self) { key in
+                                Text("\(Text("\(key).").bold()) \(puzzle.key.down[key]!.clue)")
+                            }
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                        .padding(.top, 5)
+                        .padding(.trailing, 10)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                }
             }
-        }
-        .navigationBarTitle("Crossword Puzzle", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-                viewModel.showSettingsView.toggle()
-        }) {
-            Image(systemName: "gear")
-        })
-        .sheet(isPresented: $viewModel.showSettingsView) {
-            SettingsView()
-        }
-        .padding(20)
-        .onAppear(perform: viewModel.loadPuzzleData)
-        .alert(isPresented: $viewModel.showAlert) {
-            Alert(
-                title: Text(viewModel.alertTitle),
-                message: Text(viewModel.alertMessage),
-                dismissButton: .default(Text("OK"))
-            )
+            .onAppear {
+                self.gameManager.startTimer()
+            }
+            .sheet(item: $gameManager.activeSheet) { item in
+                switch item {
+                case .settingsView:
+                    SettingsView()
+                case .pauseView:
+                    PauseView(gameManager: gameManager)
+                case .winView:
+                    WinView()
+                }
+            }
         }
     }
 }
 
-
-
-
+struct CrosswordBoardView_Previews: PreviewProvider {
+    static var previews: some View {
+        CrosswordBoardView().environmentObject(GameManager(puzzleFile: "puzzle"))
+    }
+}
