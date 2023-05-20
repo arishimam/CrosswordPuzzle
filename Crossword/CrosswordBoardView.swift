@@ -224,7 +224,8 @@ class GameManager: ObservableObject {
 
 struct CrosswordBoardView: View {
     @EnvironmentObject var gameManager: GameManager
-
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack {
             ScrollView {
@@ -270,12 +271,18 @@ struct CrosswordBoardView: View {
                             }) {
                                 Text(gameManager.isCheckingAnswers ? "Hide Mistakes" : "Check Answers")
                             }
-                        }, trailing: Button(action: {
-                            gameManager.activeSheet = .settingsView
-                        }){
-                            Image(systemName: "gear")
+                        }, trailing: HStack {
+                            Button(action: {
+                                presentationMode.wrappedValue.dismiss()
+                            }){
+                                Text("Quit")
+                            }
+                            Button(action: {
+                                gameManager.activeSheet = .settingsView
+                            }){
+                                Image(systemName: "gear")
+                            }
                         })
-                        
                         .padding(20)
                     }
                 }
