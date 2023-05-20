@@ -128,6 +128,7 @@
 				7AE538DA2A02E1A100413841 /* HowToPlayView.swift */,
 				7A35E5842A18858600686AE8 /* HistoryView.swift */,
 				7AE538DD2A02E83700413841 /* StatsView.swift */,
+				7A35E5802A18488200686AE8 /* WinView.swift */,
 				7A35E57A2A173FC000686AE8 /* CrosswordService.swift */,
 				7A02A2B429DB482100BCD2A1 /* CrosswordApp.swift */,
 				7A35E57C2A17419900686AE8 /* puzzle.json */,
@@ -136,7 +137,6 @@
 				7A02A2B829DB482300BCD2A1 /* Assets.xcassets */,
 				7A02A2BA29DB482300BCD2A1 /* Preview Content */,
 				7A35E57E2A18485600686AE8 /* PauseView.swift */,
-				7A35E5802A18488200686AE8 /* WinView.swift */,
 			);
 			path = Crossword;
 			sourceTree = "<group>";
