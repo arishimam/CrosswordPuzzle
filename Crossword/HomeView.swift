@@ -4,7 +4,7 @@ struct HomeView: View {
     @State private var selectedTab = 0
     @State private var showSettingsView = false
     @State private var showCrosswordBoardView = false
-    @State private var hasExistingGame = false
+//    @State private var hasExistingGame = false
     
     @StateObject var gameManager: GameManager
 
@@ -13,7 +13,7 @@ struct HomeView: View {
             VStack {
                 TabView(selection: $selectedTab) {
                     VStack {
-                        NavigationLink(destination: CrosswordBoardView().environmentObject(gameManager), isActive: $hasExistingGame){
+                        NavigationLink(destination: CrosswordBoardView().environmentObject(gameManager)){
                             Text("New Game")
                                 .font(.title2)
                                 .padding()
@@ -28,14 +28,15 @@ struct HomeView: View {
                         if gameManager.puzzle != nil {
                             Button(action: {
                                 // Continue the existing game
-                                if gameManager.puzzle != nil {
-                                    self.hasExistingGame = true
-                                }
+//                                if gameManager.puzzle != nil {
+//                                    self.hasExistingGame = true
+//                                }
                             }) {
                                 Text("Continue")
                                     .font(.title2)
                                     .padding()
-                                    .background(gameManager.puzzle != nil ? Color.green : Color.gray)
+//                                    .background(gameManager.puzzle != nil ? Color.green : Color.gray)
+                                    .background(.gray)
                                     .foregroundColor(.white)
                                     .cornerRadius(8)
                             }

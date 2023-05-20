@@ -9,15 +9,16 @@ import Foundation
 import SwiftUI
 
 struct PauseView: View {
-    @Binding var elapsedTime: Int
-    var resumeTimer: () -> Void
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var gameManager: GameManager
 
     var body: some View {
         VStack {
             Text("Game is Paused")
-            Text("Elapsed Time: \(elapsedTime)")
+            Text("Elapsed Time: \(gameManager.formatTime(seconds: gameManager.elapsedTime))")
             Button(action: {
-                resumeTimer()
+                gameManager.resumeTimer()
+                presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Resume")
             }

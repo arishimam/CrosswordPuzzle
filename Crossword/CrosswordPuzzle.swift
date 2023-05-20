@@ -1,3 +1,4 @@
+// JSON data will load here
 // Structure for CrosswordPuzzle
 struct CrosswordPuzzle: Codable {
     let puzzle: String
