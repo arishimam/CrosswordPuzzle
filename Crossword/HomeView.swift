@@ -53,6 +53,15 @@ struct HomeView: View {
                             Label("Stats", systemImage: "chart.bar")
                         }
                         .tag(1)
+                    
+                    ProfileView()  // Add ProfileView as a tab item
+                        .tabItem {
+                            Label("Profile", systemImage: "person.crop.circle")
+                        }
+                        .tag(2)
+
+                    
+                    
                 }
                 .padding()
             }

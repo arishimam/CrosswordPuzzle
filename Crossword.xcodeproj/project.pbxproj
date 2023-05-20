@@ -21,6 +21,7 @@
 		7A35E5852A18858600686AE8 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E5842A18858600686AE8 /* HistoryView.swift */; };
 		7A35E5882A18896200686AE8 /* puzzle2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A35E5862A18896200686AE8 /* puzzle2.json */; };
 		7A35E5892A18896200686AE8 /* puzzle3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A35E5872A18896200686AE8 /* puzzle3.json */; };
+		7A35E58B2A188CB200686AE8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A35E58A2A188CB200686AE8 /* ProfileView.swift */; };
 		7AE538932A01E70B00413841 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538922A01E70B00413841 /* HomeView.swift */; };
 		7AE538952A01E8F600413841 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538942A01E8F600413841 /* SettingsView.swift */; };
 		7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE538DA2A02E1A100413841 /* HowToPlayView.swift */; };
@@ -64,6 +65,7 @@
 		7A35E5842A18858600686AE8 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		7A35E5862A18896200686AE8 /* puzzle2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle2.json; sourceTree = "<group>"; };
 		7A35E5872A18896200686AE8 /* puzzle3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = puzzle3.json; sourceTree = "<group>"; };
+		7A35E58A2A188CB200686AE8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7AE538922A01E70B00413841 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7AE538942A01E8F600413841 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7AE538DA2A02E1A100413841 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		7A02A2B329DB482100BCD2A1 /* Crossword */ = {
 			isa = PBXGroup;
 			children = (
+				7A35E58A2A188CB200686AE8 /* ProfileView.swift */,
 				7A35E5782A173ED900686AE8 /* CrosswordPuzzle.swift */,
 				7A02A2DE29DB487400BCD2A1 /* CrosswordBoardView.swift */,
 				7AE538922A01E70B00413841 /* HomeView.swift */,
@@ -300,6 +303,7 @@
 				7AE538DB2A02E1A100413841 /* HowToPlayView.swift in Sources */,
 				7A35E5792A173ED900686AE8 /* CrosswordPuzzle.swift in Sources */,
 				7A35E57F2A18485600686AE8 /* PauseView.swift in Sources */,
+				7A35E58B2A188CB200686AE8 /* ProfileView.swift in Sources */,
 				7AE538952A01E8F600413841 /* SettingsView.swift in Sources */,
 				7A35E5852A18858600686AE8 /* HistoryView.swift in Sources */,
 				7A35E5812A18488200686AE8 /* WinView.swift in Sources */,
