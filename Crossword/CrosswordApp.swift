@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CrosswordApp: App {
+    @StateObject var gameManager = GameManager(puzzleFile: "puzzle")
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(gameManager: gameManager)
+//            WinView()
         }
     }
 }
+

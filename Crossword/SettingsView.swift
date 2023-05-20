@@ -6,7 +6,8 @@ struct SettingsView: View {
     @State private var showMistakes = false
     @State private var skipFilledSquares = false
     @State private var showHowToPlayView = false
-
+    @State private var showHistoryView = false
+    
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -22,6 +23,17 @@ struct SettingsView: View {
                     // Add the following line to present HowToPlayView as a sheet
                     .sheet(isPresented: $showHowToPlayView) {
                         HowToPlayView()
+                    }
+                    
+                    Button(action: {
+                        // Set showHistoryView to true when the button is tapped
+                        showHistoryView = true
+                    }) {
+                        Text("History of Crossword Puzzles")
+                    }
+                    // Present HistoryView as a sheet when showHistoryView is true
+                    .sheet(isPresented: $showHistoryView) {
+                        HistoryView()
                     }
                 }
                 
