@@ -230,15 +230,17 @@ struct CrosswordBoardView: View {
             ScrollView {
                 // Timer and pause button
                 HStack {
+                    Spacer()
                     Text("Time: \(gameManager.formatTime(seconds: gameManager.elapsedTime))")
-                        .alignmentGuide(.leading) { _ in 0 }
-                    Button(action: {
-                        gameManager.pauseTimer()
-                        gameManager.activeSheet = .pauseView
-                    }) {
-                        Image(systemName: "pause")
-                            .alignmentGuide(.trailing) { _ in 0 }
-                    }
+                        //.alignmentGuide(.leading) { _ in 0 }
+                    Spacer()
+//                    Button(action: {
+//                        gameManager.pauseTimer()
+//                        gameManager.activeSheet = .pauseView
+//                    }) {
+//                        Image(systemName: "pause")
+//                            .alignmentGuide(.trailing) { _ in 0 }
+//                    }
                 }
                 Group {
                     if gameManager.isLoading {
@@ -290,24 +292,30 @@ struct CrosswordBoardView: View {
                         VStack(alignment: .leading) {
                             Text("Across:")
                                 .bold()
+                                .font(.headline)
                                 .padding(.top)
                             ForEach(puzzle.key.across.keys.sorted(), id: \.self) { key in
-                                Text("\(key). \(puzzle.key.across[key]!.clue)")
+                                Text("\(Text("\(key).").bold()) \(puzzle.key.across[key]!.clue)")
                             }
+                            Spacer()
                         }
                         .padding(.horizontal)
-                        .padding(.top, 20)
+                        .padding(.top, 5)
+                        .padding(.leading, 10)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         VStack(alignment: .leading) {
                             Text("Down:")
                                 .bold()
+                                .font(.headline)
                                 .padding(.top)
                             ForEach(puzzle.key.down.keys.sorted(), id: \.self) { key in
-                                Text("\(key). \(puzzle.key.down[key]!.clue)")
+                                Text("\(Text("\(key).").bold()) \(puzzle.key.down[key]!.clue)")
                             }
+                            Spacer()
                         }
                         .padding(.horizontal)
                         .padding(.top, 5)
+                        .padding(.trailing, 10)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }
